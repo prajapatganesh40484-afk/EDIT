@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio | Your Name</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #0284c7;
+      --border: #334155;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.6;
+    }
+
+    /* Header & Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+    }
+
+    nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 1.5rem;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Layout Sections */
+    section {
+      padding: 6rem 1.5rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 40%;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    /* Hero / About Section */
+    .hero {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      gap: 2.5rem;
+      min-height: 80vh;
+      justify-content: center;
+      padding-top: 8rem;
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    .hero-content {
+      flex: 1;
+    }
+
+    .hero-title {
+      font-size: 2.75rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-bio {
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+      max-width: 600px;
+    }
+
+    .avatar-container {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--accent);
+      box-shadow: 0 10px 30px rgba(56, 189, 248, 0.2);
+      flex-shrink: 0;
+    }
+
+    .avatar-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: var(--accent);
+      color: #0f172a;
+      font-weight: 600;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Skills Section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      border-radius: 8px;
+    }
+
+    .skill-card h3 {
+      font-size: 1.1rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      list-style: none;
+    }
+
+    .skill-tag {
+      background-color: rgba(56, 189, 248, 0.1);
+      color: var(--text);
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    /* Experience Section */
+    .timeline {
+      position: relative;
+      border-left: 2px solid var(--border);
+      padding-left: 1.5rem;
+      margin-left: 0.5rem;
+    }
+
+    .timeline-item {
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.05rem;
+      top: 0.35rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .timeline-header {
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-role {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .timeline-company {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .timeline-date {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .timeline-details {
+      color: var(--text-muted);
+      list-style-position: inside;
+    }
+
+    .timeline-details li {
+      margin-bottom: 0.4rem;
+    }
+
+    /* Projects Section */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .project-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: auto;
+    }
+
+    .project-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .project-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Contact Section */
+    .contact-container {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: border-color 0.2s;
+    }
+
+    .contact-card:hover {
+      border-color: var(--accent);
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem 1.5rem 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      margin-top: 4rem;
+    }
+
+    /* Mobile Responsive Toggle */
+    @media (max-width: 600px) {
+      .nav-links {
+        gap: 1rem;
+      }
+      .hero-title {
+        font-size: 2.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <nav>
+      <a href="#about" class="logo">Portfolio</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- About / Hero Section -->
+  <section id="about" class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Hi, I'm [Your Name]</h1>
+      <p class="hero-subtitle">[Your Professional Title / Headline]</p>
+      <p class="hero-bio">
+        Passionate professional driven by solving complex problems and creating impact. 
+        Specialized in building high-quality, scalable solutions and continuously learning new technologies.
+      </p>
+      <a href="#contact" class="btn">Get In Touch</a>
+    </div>
+    <div class="avatar-container">
+      <!-- Replace src with your photo URL -->
+      <img src="https://via.placeholder.com/220" alt="Your Name Photo Placeholder" />
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>Technical Skills</h3>
+        <ul class="skills-list">
+          <li class="skill-tag">Skill One</li>
+          <li class="skill-tag">Skill Two</li>
+          <li class="skill-tag">Skill Three</li>
+          <li class="skill-tag">Skill Four</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Frameworks & Tools</h3>
+        <ul class="skills-list">
+          <li class="skill-tag">Tool/Framework A</li>
+          <li class="skill-tag">Tool/Framework B</li>
+          <li class="skill-tag">Tool/Framework C</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Domain Knowledge</h3>
+        <ul class="skills-list">
+          <li class="skill-tag">Area One</li>
+          <li class="skill-tag">Area Two</li>
+          <li class="skill-tag">Area Three</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience">
+    <h2 class="section-title">Experience</h2>
+    <div class="timeline">
+      
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <div class="timeline-role">Job Title / Position</div>
+          <div class="timeline-company">Company Name — Location</div>
+          <div class="timeline-date">Month Year – Present</div>
+        </div>
+        <ul class="timeline-details">
+          <li>Key achievement or responsibility demonstrating impact and measurable outcome.</li>
+          <li>Led cross-functional initiatives to streamline workflow and improve productivity.</li>
+          <li>Designed and executed core technical or business strategies.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <div class="timeline-role">Previous Role Title</div>
+          <div class="timeline-company">Previous Company Name — Location</div>
+          <div class="timeline-date">Month Year – Month Year</div>
+        </div>
+        <ul class="timeline-details">
+          <li>Developed solutions that increased performance or customer engagement.</li>
+          <li>Collaborated closely with team members to deliver projects on tight deadlines.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+      
+      <div class="project-card">
+        <div>
+          <h3 class="project-title">Project Title One</h3>
+          <p class="project-desc">
+            A short description of the project detailing the primary technologies used, the main goal, and the ultimate result.
+          </p>
+        </div>
+        <div class="project-links">
+          <a href="#" target="_blank" class="project-link">View Project &rarr;</a>
+          <a href="#" target="_blank" class="project-link">Source Code &rarr;</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <h3 class="project-title">Project Title Two</h3>
+          <p class="project-desc">
+            A short description of the project detailing the primary technologies used, the main goal, and the ultimate result.
+          </p>
+        </div>
+        <div class="project-links">
+          <a href="#" target="_blank" class="project-link">View Project &rarr;</a>
+          <a href="#" target="_blank" class="project-link">Source Code &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="contact-container">
+      <h2 class="section-title">Get In Touch</h2>
+      <p style="color: var(--text-muted); margin-top: 1rem;">
+        Whether you have a question, opportunity, or just want to connect, feel free to reach out!
+      </p>
+      <div class="contact-links">
+        <a href="mailto:your.email@example.com" class="contact-card">
+          ✉️ Email Me
+        </a>
+        <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-card">
+          🔗 LinkedIn
+        </a>
+        <a href="https://github.com/yourusername" target="_blank" class="contact-card">
+          💻 GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 [Your Name]. All rights reserved.</p>
+  </footer>
+
+</body>
+  </html>
+  
